@@ -1,45 +1,46 @@
-import { useState } from "react";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/footer";
-import MainContent from "./components/MainContent/MainContent";
+import { useReducer } from 'react';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import MainContent from './components/MainContent/MainContent';
+import AddTask from './components/AddTask/AddTask';
+import TaskList from './components/TaskList/TaskList';
+import taskReducer from './reducers/taskReducer';
 import './App.css';
 
-import TaskList  from "./components/TaskList/TaskList";
-import AddTask from "./components/AddTask/AddTask";
-
-
-
 interface Task {
-  id:number;
-  name:string;
-
+  id: number;
+  name: string;
+  completed: boolean;
 }
 
-function App(){
-  const [tasks, setTasks] = useState<Task[]>([]);
+const initialState = { tasks: [] };
 
-  const addTask = (taskName:string) => {
-    setTasks([...tasks, {id: tasks.length + 1, name: taskName}]);
+function App() {
+  const [state, dispatch] = useReducer(taskReducer, initialState);
+
+  const addTask = (taskName: string) => {
+    dispatch({ type: 'ADD_TASK', payload: taskName });
   };
 
-  const removeTask = (taskId:number) =>{
-    setTasks(tasks.filter(task => task.id !==taskId));
-  }
-  return(
-  <div className="app-container"> 
- 
- <Header />
+  const removeTask = (taskId: number) => {
+    dispatch({ type: 'REMOVE_TASK', payload: taskId });
+  };
 
- <MainContent>
+  const toggleTask = (taskId: number) => {
+    dispatch({ type: 'TOGGLE_TASK', payload: taskId });
+  };
 
-  <h1>Pendências</h1>
-  <AddTask onAddTask={addTask}/>
-    <TaskList tasks={tasks} onRemoveTask={removeTask} />
- </MainContent>
- <Footer/>
-  </div>
-
-
+  return (
+    <div className="app-container">
+      <Header />
+      <MainContent>
+        <h1>Pendências</h1>
+        <AddTask onAddTask={addTask} />
+        <TaskList tasks={state.tasks} onRemoveTask={removeTask} onToggleTask={toggleTask} />
+      </MainContent>
+      <Footer />
+    </div>
   );
 }
+
 export default App;
