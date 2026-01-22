@@ -15,12 +15,15 @@ import './App.css';
 
 const initialState = { tasks: [] as Task[] };
 
+
+
+
 function App() {
 
   const [state, dispatch] = useReducer(taskReducer, initialState);
 
 
- const{ coordinates } = useGeolocation();
+ const{ coordinates, permission } = useGeolocation();
 
   useEffect(() => {
     api.get('/tasks')
@@ -74,6 +77,10 @@ function App() {
     <>
     <pre> 
       {JSON.stringify(coordinates)}
+    </pre>
+
+    <pre>
+     {permission} 
     </pre>
 
 

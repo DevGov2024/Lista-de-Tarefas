@@ -11,6 +11,8 @@ const useGeolocation = () => {
     longitude: null,
   });
 
+  const [permission,setPermission ] = useState('')
+
   useEffect(() => {
     const onSuccess = (position: GeolocationPosition) => {
       setCoordinates({
@@ -22,6 +24,19 @@ const useGeolocation = () => {
     const onError = (error: GeolocationPositionError) => {
       console.error("Erro ao obter localização:", error.message);
     };
+     
+   const handlePermissionChange = (status: PermissionStatus) => {
+  setPermission(status.state);
+
+  if (status.state === 'denied') {
+    alert('Posicionamento bloqueado');
+  }
+
+  if (status.state === 'granted' || status.state === 'prompt') {
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  }
+};
+
 
     const watchId = navigator.geolocation.watchPosition(
       onSuccess,
@@ -30,10 +45,16 @@ const useGeolocation = () => {
 
     return () => {
       navigator.geolocation.clearWatch(watchId);
+
+      navigator.permissions.query({ name: 'geolocation' })
+
+      .then((status) => {
+         handlePermissionChange(status);
+      })
     };
   }, []);
 
-  return { coordinates };
+  return { coordinates, permission};
 };
 
 export default useGeolocation;
