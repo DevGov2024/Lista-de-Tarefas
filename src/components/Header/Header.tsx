@@ -25,7 +25,7 @@ const Nav = styled.nav`
 
 const IconLink = styled(Link)`
   color: #f1efef;
-  font-size: 30px;
+  font-size: 35px;
   transition: color 0.2s ease;
 
   &:hover {
