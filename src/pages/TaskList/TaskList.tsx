@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 interface TaskListProps {
@@ -61,10 +61,6 @@ const Button = styled.button`
 `;
 
 const TaskList: React.FC<TaskListProps> = ({ tasks, onRemoveTask, onToggleTask }) => {
-  useEffect(() => {
-    console.log('A lista de tarefas foi atualizada:', tasks);
-  }, [tasks]);
-
   return (
     <List>
       {tasks.map((task) => (
