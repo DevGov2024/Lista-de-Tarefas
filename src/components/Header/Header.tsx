@@ -1,29 +1,34 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-
 const HeaderContainer = styled.header`
-display: flex;
-background-color: #ed145b;
-color: white;
-justify-content: center;
-padding: 20px;
+ 
+ display: flex;
+  background-color: #0c78d0;
+  color: white;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+
+ 
 `;
 
-const HeaderTitle = styled.h1`
-text-align:center;
+const Nav = styled.nav`
+  display: flex;
+  gap: 15px;
 `;
-
-
 
 const Header: React.FC = () => {
-    return (
+  return (
     <HeaderContainer>
-        <HeaderTitle>Lista de Tarefas </HeaderTitle>
+      <Nav>
+        <Link to="/">Home</Link>
+        <Link to="/completed">Tarefas Concluídas</Link>
+        <Link to="/pending">Tarefas Pendentes</Link>
+      </Nav>
     </HeaderContainer>
-
-
-    );
+  );
 };
-  export default Header;
+
+export default Header;

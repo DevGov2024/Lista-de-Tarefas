@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import type { Task } from '../../types';
 
 interface TaskListProps {
-  tasks: { id: number; name: string; completed: boolean }[];
+  tasks: Task[];
   onRemoveTask: (taskId: number) => void;
   onToggleTask: (taskId: number) => void;
 }
@@ -34,7 +35,7 @@ const Checkbox = styled.input`
 `;
 
 const Button = styled.button`
-  background-color: #ed145b;
+  background-color: #0c78d0;
   color: white;
   border: none;
   border-radius: 4px;
@@ -43,7 +44,7 @@ const Button = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #c10e49;
+    background-color: #0c78d0;
   }
 
   &:focus {
@@ -51,7 +52,7 @@ const Button = styled.button`
   }
 
   &:active {
-    background-color: #c10e49;
+    background-color: #0c78d0;
     box-shadow: none;
   }
 

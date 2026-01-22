@@ -24,7 +24,7 @@ const Input = styled.input`
 const Button = styled.button`
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #ed145b;
+  background-color: #0c78d0;
   color: white;
   border: none;
   border-radius: 4px;
@@ -32,7 +32,7 @@ const Button = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #c10e49;
+    background-color: #0c78d0;
   }
 
   @media (max-width: 600px) {
