@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
-  background-color: #0c78d0;
+   background-color: #407eb0;
   color: white;
   text-align: center;
   padding: 10px 0;
@@ -14,7 +14,7 @@ const FooterContainer = styled.footer`
 const Footer: React.FC = () => {
   return (
     <FooterContainer>
-      <p>Direitos autorais © 2024</p>
+      <p>Direitos autorais Gabriel Moura  2026</p>
     </FooterContainer>
   );
 };

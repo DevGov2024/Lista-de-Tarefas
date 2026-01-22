@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import {FaHome, FaCheckCircle, FaClock } from  "react-icons/fa";
+
 
 const HeaderContainer = styled.header`
  
  display: flex;
-  background-color: #0c78d0;
+  background-color: #407eb0;
   color: white;
-  justify-content: center;
-  padding: 20px;
+  justify-content:center;
+  padding: 40px;
   width: 100%;
 
  
@@ -16,16 +18,37 @@ const HeaderContainer = styled.header`
 
 const Nav = styled.nav`
   display: flex;
-  gap: 15px;
+  gap: 50px;
+  justify-content: center;
+  padding: 16px;
 `;
+
+const IconLink = styled(Link)`
+  color: #f1efef;
+  font-size: 30px;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #ed145b;
+  }
+`;
+
 
 const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <Nav>
-        <Link to="/">Home</Link>
-        <Link to="/completed">Tarefas Concluídas</Link>
-        <Link to="/pending">Tarefas Pendentes</Link>
+        <IconLink to="/" title="Home">
+    <FaHome />
+  </IconLink>
+
+  <IconLink to="/completed" title="Tarefas Concluídas">
+    <FaCheckCircle />
+  </IconLink>
+
+  <IconLink to="/pending" title="Tarefas Pendentes">
+    <FaClock />
+  </IconLink>
       </Nav>
     </HeaderContainer>
   );
