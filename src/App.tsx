@@ -9,13 +9,18 @@ import TaskList from './pages/TaskList/TaskList';
 import CompletedTasks from './pages/CompletedTasks/CompletedTasks';
 import PendingTasks from './pages/PendingTasks/PendingTasks';
 import taskReducer from './reducers/taskReducer';
+import useGeolocation from './hooks/useGeolocation';
 import  type { Task } from './types';
 import './App.css';
 
 const initialState = { tasks: [] as Task[] };
 
 function App() {
+
   const [state, dispatch] = useReducer(taskReducer, initialState);
+
+
+ const{ coordinates } = useGeolocation();
 
   useEffect(() => {
     api.get('/tasks')
@@ -66,6 +71,13 @@ function App() {
   };
 
   return (
+    <>
+    <pre> 
+      {JSON.stringify(coordinates)}
+    </pre>
+
+
+
     <Router>
       <div className="app-container">
         <Header />
@@ -85,6 +97,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </>
   );
 }
 
