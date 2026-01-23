@@ -15,9 +15,6 @@ import './App.css';
 
 const initialState = { tasks: [] as Task[] };
 
-
-
-
 function App() {
 
   const [state, dispatch] = useReducer(taskReducer, initialState);

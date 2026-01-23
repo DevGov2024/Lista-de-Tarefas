@@ -6,7 +6,7 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
+  padding: 50px;
   align-items: center;
 `;
 
