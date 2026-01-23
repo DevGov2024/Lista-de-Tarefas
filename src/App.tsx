@@ -92,7 +92,7 @@ function App() {
           <Routes>
             <Route path="/" element={
               <>
-                <h1>Pendências</h1>
+                <h1>Criar um Post</h1>
                 <AddTask onAddTask={addTask} />
                 <TaskList tasks={state.tasks} onRemoveTask={removeTask} onToggleTask={toggleTask} />
               </>
