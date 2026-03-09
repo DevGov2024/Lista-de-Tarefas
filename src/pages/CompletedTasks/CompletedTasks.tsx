@@ -27,7 +27,7 @@ const CompletedTasks: React.FC<CompletedTasksProps> = ({ tasks }) => {
 
   return (
     <div>
-      <h1>Tarefas Concluídas</h1>
+      <h1>Posts Concluídas</h1>
       <List>
         {completedTasks.map(task => (
           <ListItem key={task.id}>

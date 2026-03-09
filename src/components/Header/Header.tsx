@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {FaHome, FaCheckCircle, FaClock } from  "react-icons/fa";
+import {FaHome, FaCheckCircle, FaClock,  FaSignInAlt } from  "react-icons/fa";
 
 
 const HeaderContainer = styled.header`
@@ -42,12 +42,16 @@ const Header: React.FC = () => {
     <FaHome />
   </IconLink>
 
-  <IconLink to="/completed" title="Tarefas Concluídas">
+  <IconLink to="/completed" title="Posts Concluídas">
     <FaCheckCircle />
   </IconLink>
 
-  <IconLink to="/pending" title="Tarefas Pendentes">
+  <IconLink to="/pending" title="Posts Pendentes">
     <FaClock />
+  </IconLink>
+
+  <IconLink to= "/Login" title = "Login Administrador">
+   < FaSignInAlt />
   </IconLink>
       </Nav>
     </HeaderContainer>

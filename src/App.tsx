@@ -9,8 +9,11 @@ import TaskList from './pages/TaskList/TaskList';
 import CompletedTasks from './pages/CompletedTasks/CompletedTasks';
 import PendingTasks from './pages/PendingTasks/PendingTasks';
 import taskReducer from './reducers/taskReducer';
+import Login from './pages/Login/Login';
+import { useState } from 'react';
 import useGeolocation from './hooks/useGeolocation';
 import  type { Task } from './types';
+
 import './App.css';
 
 const initialState = { tasks: [] as Task[] };
@@ -52,6 +55,10 @@ function App() {
       });
   };
 
+  const [isAuthenticated, setIsAuthenticated] = useState(
+  localStorage.getItem("auth") === "true"
+);
+
   const toggleTask = (taskId: number) => {
     const task = state.tasks.find((task: Task) => task.id === taskId);
     if (task) {
@@ -88,6 +95,8 @@ function App() {
         <MainContent>
           <Routes>
             <Route path="/" element={
+
+              
               <>
                 <h1>Criar um Post</h1>
                 <AddTask onAddTask={addTask} />
@@ -96,6 +105,7 @@ function App() {
             } />
             <Route path="/completed" element={<CompletedTasks tasks={state.tasks} />} />
             <Route path="/pending" element={<PendingTasks tasks={state.tasks} />} />
+            <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />}    />
           </Routes>
         </MainContent>
         <Footer />

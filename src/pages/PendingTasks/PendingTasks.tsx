@@ -28,7 +28,7 @@ const PendingTasks: React.FC<PendingTasksProps> = ({ tasks }) => {
 
   return (
     <div>
-      <h1>Tarefas Pendentes</h1>
+      <h1>Posts Pendentes</h1>
       <List>
         {pendingTasks.map(task => (
           <ListItem key={task.id} completed={task.completed}>
