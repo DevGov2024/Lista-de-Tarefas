@@ -1,73 +1,159 @@
-# React + TypeScript + Vite
+# 📘 Blog Frontend - Tech Challenge (Fase 03)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Descrição
 
-Currently, two official plugins are available:
+Este projeto consiste no desenvolvimento de uma interface gráfica para um sistema de blog, utilizando React e integração com uma API REST.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A aplicação permite que usuários visualizem postagens, enquanto usuários autenticados (professores) podem criar, editar e excluir conteúdos.
 
-## React Compiler
+O projeto foi originalmente baseado em um sistema de gerenciamento de tarefas (To-Do List), sendo adaptado para atender aos requisitos de um sistema de blog.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🎯 Objetivo
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Desenvolver uma aplicação front-end moderna, responsiva e funcional, capaz de consumir endpoints REST e proporcionar uma boa experiência ao usuário.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Tecnologias Utilizadas
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* React
+* TypeScript
+* Styled Components
+* Axios
+* React Router DOM
+* JSON Server (simulação de API)
+
+---
+
+## 🏗️ Arquitetura do Projeto
+
+A aplicação está organizada em:
+
+* **components/** → Componentes reutilizáveis (Header, Footer, etc.)
+* **pages/** → Páginas da aplicação (AddTask, TaskList, Login, etc.)
+* **reducers/** → Gerenciamento de estado com useReducer
+* **hooks/** → Hooks customizados (ex: geolocalização)
+* **api/** → Comunicação com backend
+
+---
+
+## 📄 Funcionalidades
+
+### 👨‍🎓 Usuários comuns
+
+* Visualizar lista de posts
+* Buscar informações básicas (título, autor, descrição)
+* Visualizar conteúdo completo do post
+
+### 👨‍🏫 Professores (autenticados)
+
+* Criar novos posts
+* Excluir posts existentes
+* Acessar funcionalidades administrativas
+
+---
+
+## 🔐 Autenticação
+
+A autenticação foi implementada de forma simplificada utilizando:
+
+* `localStorage`
+* Controle de estado (`isAuthenticated`)
+
+Apenas usuários autenticados podem realizar ações de criação e exclusão de posts.
+
+---
+
+## 🔌 Integração com API
+
+A aplicação consome uma API REST simulada com JSON Server.
+
+### Endpoints utilizados:
+
+* `GET /tasks` → listar posts
+* `POST /tasks` → criar post
+* `DELETE /tasks/:id` → excluir post
+* `PUT /tasks/:id` → atualizar post
+
+---
+
+## ⚙️ Como Executar o Projeto
+
+### 1. Clonar o repositório
+
+```bash
+git clone <url-do-repositorio>
+cd nome-do-projeto
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Instalar dependências
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Rodar o JSON Server
+
+```bash
+npx json-server --watch db.json
+```
+
+### 4. Rodar o projeto
+
+```bash
+npm run dev
+```
+
+---
+
+## 📱 Responsividade
+
+A interface foi desenvolvida utilizando Styled Components, garantindo adaptação para diferentes tamanhos de tela.
+
+---
+
+## 🎥 Demonstração
+
+A aplicação permite demonstrar:
+
+* Criação de post
+* Listagem de posts
+* Visualização de conteúdo completo
+* Exclusão de post
+* Login de professor
+
+---
+
+## 🧠 Desafios Enfrentados
+
+* Adaptação de um sistema de tarefas para um sistema de blog
+* Estruturação dos dados (title, author, description, content)
+* Controle de autenticação e permissões
+* Integração com API REST
+* Evitar inconsistência de dados entre frontend e backend
+
+---
+
+## 📈 Melhorias Futuras
+
+* Implementação de edição de posts
+* Autenticação com JWT
+* Criação de página dedicada para leitura de posts
+* Deploy da aplicação
+* Melhorias na interface e experiência do usuário
+
+---
+
+## 👨‍💻 Autor
+
+Gabriel Henrique
+
+---
+
+## 📌 Considerações Finais
+
+O projeto atende aos requisitos propostos no Tech Challenge, demonstrando conhecimentos em React, integração com APIs e organização de código.
+
+---

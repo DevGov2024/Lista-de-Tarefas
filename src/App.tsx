@@ -1,4 +1,4 @@
-import  { useReducer, useEffect } from 'react';
+import { useReducer, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import api from './api';
 import Header from './components/Header/Header';
@@ -12,7 +12,7 @@ import taskReducer from './reducers/taskReducer';
 import Login from './pages/Login/Login';
 import { useState } from 'react';
 import useGeolocation from './hooks/useGeolocation';
-import  type { Task } from './types';
+import type { Task } from './types';
 
 import './App.css';
 
@@ -23,7 +23,7 @@ function App() {
   const [state, dispatch] = useReducer(taskReducer, initialState);
 
 
- const{ coordinates, permission } = useGeolocation();
+  const { coordinates, permission } = useGeolocation();
 
   useEffect(() => {
     api.get('/tasks')
@@ -35,8 +35,16 @@ function App() {
       });
   }, []);
 
-  const addTask = (taskName: string) => {
-    api.post('/tasks', { name: taskName, completed: false, completedAt: null })
+
+  const addTask = (task: any) => {
+    api.post('/tasks', {
+      title: task.title,
+      author: task.author,
+      description: task.description,
+      content: task.content,
+      completed: false,
+      completedAt: null
+    })
       .then(response => {
         dispatch({ type: 'ADD_TASK', payload: response.data });
       })
@@ -44,6 +52,8 @@ function App() {
         console.error('Error adding task:', error);
       });
   };
+
+
 
   const removeTask = (taskId: number) => {
     api.delete(`/tasks/${taskId}`)
@@ -56,8 +66,8 @@ function App() {
   };
 
   const [isAuthenticated, setIsAuthenticated] = useState(
-  localStorage.getItem("auth") === "true"
-);
+    localStorage.getItem("auth") === "true"
+  );
 
   const toggleTask = (taskId: number) => {
     const task = state.tasks.find((task: Task) => task.id === taskId);
@@ -79,38 +89,48 @@ function App() {
 
   return (
     <>
-    <pre> 
-      {JSON.stringify(coordinates)}
-    </pre>
+      <pre>
+        {JSON.stringify(coordinates)}
+      </pre>
 
-    <pre>
-     {permission} 
-    </pre>
+      <pre>
+        {permission}
+      </pre>
 
 
 
-    <Router>
-      <div className="app-container">
-        <Header />
-        <MainContent>
-          <Routes>
-            <Route path="/" element={
+      <Router>
+        <div className="app-container">
+          <Header />
+          <MainContent>
+            <Routes>
+              <Route path="/" element={
 
-              
-              <>
-                <h1>Criar um Post</h1>
-                <AddTask onAddTask={addTask} />
-                <TaskList tasks={state.tasks} onRemoveTask={removeTask} onToggleTask={toggleTask} />
-              </>
-            } />
-            <Route path="/completed" element={<CompletedTasks tasks={state.tasks} />} />
-            <Route path="/pending" element={<PendingTasks tasks={state.tasks} />} />
-            <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />}    />
-          </Routes>
-        </MainContent>
-        <Footer />
-      </div>
-    </Router>
+
+                <>
+                  <h1>Criar um Post</h1>
+                  {isAuthenticated ? (
+                    <AddTask onAddTask={addTask} />
+                  ) : (
+                    <p>🔒 Apenas professores podem publicar posts</p>
+                  )}
+
+                  <TaskList
+                    tasks={state.tasks}
+                    onRemoveTask={removeTask}
+                    onToggleTask={toggleTask}
+                    isAuthenticated={isAuthenticated}
+                  />
+                </>
+              } />
+              <Route path="/completed" element={<CompletedTasks tasks={state.tasks} />} />
+              <Route path="/pending" element={<PendingTasks tasks={state.tasks} />} />
+              <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+            </Routes>
+          </MainContent>
+          <Footer />
+        </div>
+      </Router>
     </>
   );
 }

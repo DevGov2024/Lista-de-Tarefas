@@ -1,9 +1,12 @@
-export interface Task {
 
-    id: number;
-   name: string;
-    completed: boolean;
-     completedAt?: Date| null;
-   
 
-}
+
+    export type Task = {
+  id: number;
+  title: string;
+  description: string;
+  content: string;
+  author: string;
+  completed: boolean;
+  completedAt?: Date | null;
+};

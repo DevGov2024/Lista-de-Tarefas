@@ -1,64 +1,27 @@
 import { useState } from "react";
-import api from "../../api";
 
-interface Props {
-  setIsAuthenticated: (value: boolean) => void;
-}
-
-function Login({ setIsAuthenticated }: Props) {
-
-  const [username, setUsername] = useState("");
+export default function Login({ setIsAuthenticated }: any) {
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-
-      const response = await api.get(
-        `/users?username=${username}&password=${password}`
-      );
-
-      if (response.data.length > 0) {
-
-        setIsAuthenticated(true);
-
-        localStorage.setItem("auth", "true");
-
-        alert("Login realizado com sucesso");
-
-      } else {
-        alert("Usuário ou senha incorretos");
-      }
-
-    } catch (error) {
-      console.error("Erro no login", error);
+  const handleLogin = () => {
+    if (password === "1234") {
+      localStorage.setItem("auth", "true");
+      setIsAuthenticated(true);
+      alert("Login realizado!");
+    } else {
+      alert("Senha incorreta");
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-
-      <input
-        type="text"
-        placeholder="Usuário"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-
+    <div>
+      <h1>Login Professor</h1>
       <input
         type="password"
-        placeholder="Senha"
-        value={password}
+        placeholder="Digite a senha"
         onChange={(e) => setPassword(e.target.value)}
       />
-
-      <button type="submit">
-        Login
-      </button>
-
-    </form>
+      <button onClick={handleLogin}>Entrar</button>
+    </div>
   );
 }
-
-export default Login;

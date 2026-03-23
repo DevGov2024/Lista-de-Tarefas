@@ -17,10 +17,6 @@ const ListItem = styled.li<{ completed: boolean }>`
   padding: 10px;
   margin: 5px 0;
   border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-decoration: ${({ completed }) => (completed ? 'line-through' : 'none')};
 `;
 
 const PendingTasks: React.FC<PendingTasksProps> = ({ tasks }) => {
@@ -32,7 +28,11 @@ const PendingTasks: React.FC<PendingTasksProps> = ({ tasks }) => {
       <List>
         {pendingTasks.map(task => (
           <ListItem key={task.id} completed={task.completed}>
-            {task.name}
+            <strong>{task.title}</strong>
+            <br />
+            <span>{task.description}</span>
+            <br />
+            <small>Autor: {task.author}</small>
           </ListItem>
         ))}
       </List>
@@ -41,4 +41,3 @@ const PendingTasks: React.FC<PendingTasksProps> = ({ tasks }) => {
 };
 
 export default PendingTasks;
-
