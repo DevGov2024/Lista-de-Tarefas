@@ -146,6 +146,9 @@ A aplicação permite demonstrar:
 
 ---
 
+## Canal no youtube
+https://youtu.be/jLS-ln_8R7A
+
 ## 👨‍💻 Autor
 
 Gabriel Henrique
